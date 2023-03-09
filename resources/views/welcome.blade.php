@@ -9,11 +9,23 @@
 </head>
 
 <body>
+    <form action="tags" method="post">
+        @csrf
+        <input type="text" name="name" id="">
+        <input type="submit" value="Agregar">
+    </form>
     <h1>Lisatdo de etiquetas</h1>
     <table>
         @forelse($tags as $tag)
         <tr>
             <td>{{ $tag->name }}</td>
+            <td>
+                <form action="tags/{{ $tag->id }}" method="post">
+                    @csrf
+                    @method('DELETE')
+                    <input type="submit" value="Eliminar">
+                </form>
+            </td>
         </tr>
         @empty
         <tr>
